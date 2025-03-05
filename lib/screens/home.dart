@@ -111,12 +111,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                       content:
-                          Text('Erreur lors de l\'enregistrement de la note.')),
+                      Text('Erreur lors de l\'enregistrement de la note.')),
                 );
               }
             },
             child:
-                Text('Enregistrer', style: TextStyle(color: Colors.green[400])),
+            Text('Enregistrer', style: TextStyle(color: Colors.green[400])),
           ),
         ],
       ),
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: FutureBuilder<List<Note>>(
                 future:
-                    isar.notes.filter().userIdEqualTo(currentUserId).findAll(),
+                isar.notes.filter().userIdEqualTo(currentUserId).findAll(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final notes = snapshot.data!;
@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Cliquez sur le bouton en bas pour ajouter une nouvelle note.',
                             textAlign: TextAlign.center,
                             style:
-                                TextStyle(fontSize: 16, color: Colors.black87),
+                            TextStyle(fontSize: 16, color: Colors.black87),
                           ),
                         ),
                       );
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onLongPress: () => _deleteNote(note),
                           leading: Icon(Icons.note, color: Colors.blue[400]),
                           trailing:
-                              Icon(Icons.chevron_right, color: Colors.grey),
+                          Icon(Icons.chevron_right, color: Colors.grey),
                         );
                       },
                     );
@@ -293,7 +293,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   _titleController.clear();
                   _contentController.clear();
-                  Navigator.pop(context);
                   setState(() {});
                 },
                 child: Text('Mettre à jour',
@@ -330,6 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 await isar.writeTxn(() async {
                   await isar.notes.delete(note.id);
                 });
+                Navigator.of(context).pop();
                 Navigator.of(context).pop();
                 setState(() {});
               },
